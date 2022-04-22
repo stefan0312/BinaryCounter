@@ -19,21 +19,29 @@ Gpio::Gpio(QObject *parent) : QObject(parent)
 }
 
 Gpio::~Gpio()
+
 {
     // Cleanup GPIO
-    int init_level = 0;
-    for (auto pin : LEDS)
-        lgGpioWrite(m_handle, pin, init_level);
-    lgGpiochipClose(m_handle);
-}
+   int init_level = 0;
+   for (auto pin : LEDS)
+       lgGpioWrite(m_handle, pin, init_level);
+   lgGpiochipClose(m_handle);
+
+
+
+
+    }
+
 
 // Write to pins
 void Gpio::set(int pin, bool value)
 {
     int result = lgGpioWrite(m_handle, pin, value);
-    if (result < 0)
+    if(result < 0)
         throw lguErrorText(result);
+
 }
+
 
 
 // Read pin state
